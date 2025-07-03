@@ -5,6 +5,8 @@ const mongoose = require('mongoose');
 // const mongoose = require('mongoose');
 const path=require("path");
 const Chat=require("./models/chat.js");
+// const Chat=require("init.js");
+
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","ejs");
 
@@ -33,9 +35,17 @@ chat1.save().then((res)=>{
 });
 
 
-app.get("/",(req,res)=>{
-    res.send("Root is working properly");
-});
 app.listen(8080,()=>{
 console.log("App is listening in the port 8080");
+});
+
+app.get("/",(req,res)=>{
+  res.send("Root is working properly");
+});
+app.get("/chats",async(req,res)=>{
+  let chats=await Chat.find();
+  console.log(chats);
+
+
+  res.send("working");
 });
